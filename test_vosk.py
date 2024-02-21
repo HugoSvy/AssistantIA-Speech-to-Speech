@@ -2,6 +2,7 @@
 
 import wave
 import sys
+#import json
 
 from vosk import Model, KaldiRecognizer, SetLogLevel
 
@@ -33,3 +34,6 @@ while True:
         print(rec.PartialResult())
 
 print(rec.FinalResult())
+
+#res = json.loads(rec.FinalResult())
+#print(res["text"])
