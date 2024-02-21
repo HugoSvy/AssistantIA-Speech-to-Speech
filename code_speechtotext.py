@@ -38,6 +38,7 @@ def chatgpt_streamed(user_input):
     streamed_completion = client.chat.completions.create(
         model="local-model",
         messages=[
+            {"role": "system", "content": "provides concise answers."},
             {"role": "user", "content" : user_input}
         ],
         stream = True
@@ -118,34 +119,14 @@ try:
             data = q.get()
             if rec.AcceptWaveform(data):
                 res2 = json.loads(rec.Result())
-                print(res2["text"])
                 prompt = res2["text"]
-                solution = chatgpt_streamed(prompt)
-                
-            else:
-                partial_result = json.loads(rec.PartialResult())
+                print(res2["text"])
 
-                #if partial_result:
-                 #   print(partial_result["partial"])
-
-            if dump_fn is not None:
-                dump_fn.write(data)
+                if(prompt != ""):
+                    solution = chatgpt_streamed(prompt)
+                    prompt = ""
                 
-            
-        '''
-        while True:
-            data = q.get()
-            if rec.AcceptWaveform(data):
-                result = rec.Result()
-                if result:
-                    print(result["text"])
-            else:
-                partial_result = rec.PartialResult()
-                if partial_result:
-                    print(partial_result["partial"])
-            if dump_fn is not None:
-                dump_fn.write(data)
-        '''
+           
 
 except KeyboardInterrupt:
     print("\nDone")
