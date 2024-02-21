@@ -2,7 +2,7 @@
 
 import wave
 import sys
-#import json
+import json
 
 from vosk import Model, KaldiRecognizer, SetLogLevel
 
@@ -28,12 +28,14 @@ while True:
     data = wf.readframes(4000)
     if len(data) == 0:
         break
+    
     if rec.AcceptWaveform(data):
         print(rec.Result())
     else:
         print(rec.PartialResult())
 
 print(rec.FinalResult())
+
 
 #res = json.loads(rec.FinalResult())
 #print(res["text"])
