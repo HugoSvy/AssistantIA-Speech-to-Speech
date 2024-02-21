@@ -11,7 +11,7 @@
 
 - **Hugo Savoye**
 - **Léa Mariot**
-- **Manon Dubosq**
+- **Manon Duboscq**
 - **Mehdi L'Hommeau**: Tuteur
 
 ## Utilisation
