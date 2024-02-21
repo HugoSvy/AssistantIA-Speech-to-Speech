@@ -5,6 +5,17 @@
 - **SpeechToText**: Transcription en local d'un audio en temps réel.
 - **TextToSpeech**: Transcription en local d'un texte avec des voix réalistes.
 
+*démo*
+
+## Equipe
+
+- **Hugo Savoye**
+- **Léa Mariot**
+- **Manon Dubosq**
+- **Mehdi L'Hommeau**: Tuteur
+
+## Utilisation
+
 
 
 
