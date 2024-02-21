@@ -1,4 +1,4 @@
-# Assistant IA
+# Assistant avec Speech-to-Text utilisant l'IA llama 2 de Meta
 
 ## Section 1: Contexte
 - **Développement Technologique**: L'évolution rapide de l'intelligence artificielle et de la reconnaissance vocale.
