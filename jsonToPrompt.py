@@ -1,16 +1,16 @@
 import json
 
-fichier_texte = "votre_fichier.txt"
+fichier_json = "T:\message.txt"
 
 # Ouvrir le fichier JSON
-with open(fichier_texte, 'r') as f:
+with open(fichier_json, 'r') as f:
     data = f.read()
 
 # Séparer le fichier JSON en lignes
 lines = data.split('\n')
 
-# Initialiser une liste pour stocker les mots
-words = []
+# Initialiser une liste pour stocker les chaînes de caractères
+strings = []
 
 # Parcourir les lignes du fichier JSON
 for line in lines:
@@ -20,20 +20,14 @@ for line in lines:
     except json.JSONDecodeError:
         continue
     
-    # Vérifier si la clé "result" existe
-    if "result" in json_obj:
-        # Récupérer les mots de la clé "result"
-        for item in json_obj["result"]:
-            words.append(item["word"])
+    # Vérifier si la clé "text" existe
+    if "text" in json_obj:
+        # Ajouter la chaîne de caractères à la liste
+        strings.append(json_obj["text"])
 
-    # Vérifier si la clé "partial_result" existe
-    if "partial_result" in json_obj:
-        # Récupérer les mots de la clé "partial_result"
-        for item in json_obj["partial_result"]:
-            words.append(item["word"])
+# Concaténer les chaînes de caractères en une seule chaîne
+result_string = ' '.join(strings)
 
-# Concaténer les mots en une seule chaîne de caractères
-result_string = ' '.join(words)
-
+print(strings)
 # Afficher la chaîne de caractères résultante
 print(result_string)
