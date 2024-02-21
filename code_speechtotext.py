@@ -58,6 +58,9 @@ def chatgpt_streamed(user_input):
                 lines = line_buffer.split('\n')
                 for line in lines[:-1]:
                     print(NEON_GREEN + line + RESET_COLOR)
+                    s = pyttsx3.init()
+                    s.say(line)
+                    s.runAndWait()
                     full_response += line + '\n'
                 line_buffer = lines[-1]
 
