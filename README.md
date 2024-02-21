@@ -9,10 +9,11 @@
 
 ## Equipe
 
+- **Mehdi L'Hommeau**: Tuteur
 - **Hugo Savoye**
 - **Léa Mariot**
 - **Manon Duboscq**
-- **Mehdi L'Hommeau**: Tuteur
+
 
 ## Utilisation
 
