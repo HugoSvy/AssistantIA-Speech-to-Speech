@@ -1,6 +1,6 @@
 # Assistant IA Speech to Speech
 
-## Introduction
+## Technologies
 - **Mistral (IA en local)**: Modèle d'IA rapide pour la conversation et utilisable sur des "petits" ordinateurs.
 - **Vosk (SpeechToText)**: Transcription en local d'un audio en temps réel.
 - **OpenVoice (TextToSpeech)**: Transcription en local d'un texte avec des voix réalistes.
