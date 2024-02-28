@@ -2,13 +2,18 @@ import openai
 from openai import OpenAI
 import os
 import time
-import elevenlabs
+import pyttsx3
 
 import argparse
 import queue
 import sys
 import sounddevice as sd
 import json
+import torch
+import pyaudio
+import wave
+from openvoice import se_extractor
+from openvoice.api import  BaseSpeakerTTS, ToneColorConverter
 
 from vosk import Model, KaldiRecognizer
 
@@ -21,7 +26,6 @@ NEON_GREEN = '\033[92m'
 RESET_COLOR = '\033[0m'
 
 client = OpenAI(base_url="http://localhost:1234/v1", api_key="not-needed")
-elevenlabs.set_api_key("f345de35e9448241acf383e074d281f3")
 
 def int_or_str(text):
     """Helper function for argument parsing."""
@@ -40,7 +44,7 @@ def chatgpt_streamed(user_input):
     streamed_completion = client.chat.completions.create(
         model="local-model",
         messages=[
-            {"role": "system", "content": "You're a translator. For my conversations with French people, I need you to translate for me. I need it to be concise so I can talk to them."},
+            {"role": "system", "content": "provides concise answers."},
             {"role": "user", "content" : user_input}
         ],
         stream = True
@@ -60,6 +64,9 @@ def chatgpt_streamed(user_input):
                 lines = line_buffer.split('\n')
                 for line in lines[:-1]:
                     print(NEON_GREEN + line + RESET_COLOR)
+                    s = pyttsx3.init()
+                    s.say(line)
+                    s.runAndWait()
                     full_response += line + '\n'
                 line_buffer = lines[-1]
 
@@ -68,6 +75,63 @@ def chatgpt_streamed(user_input):
         full_response += line_buffer
 
     return full_response
+
+en_ckpt_base = 'T:/assistant_coode/OpenVoice/checkpoints/checkpoints/base_speakers/EN'
+ckpt_converter = 'T:/assistant_coode/OpenVoice/checkpoints/checkpoints/converter'
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
+output_dir = 'outputs'
+os.makedirs(output_dir, exist_ok=True)
+
+en_base_speaker_tts = BaseSpeakerTTS(f'{en_ckpt_base}/config.json',device=device)
+en_base_speaker_tts.load_ckpt(f'{en_ckpt_base}/checkpoint.pth')
+tone_color_converter = ToneColorConverter(f'{ckpt_converter}/config.json', device=device)
+tone_color_converter.load_ckpt(f'{ckpt_converter}/checkpoint.pth')
+
+en_source_default_se = torch.load(f'{en_ckpt_base}/en_default_se.pth').to(device)
+en_source_style_se = torch.load(f'{en_ckpt_base}/en_style_se.pth').to(device)
+
+def process_and_play(prompt, style, audio_file_path):
+    tts_model = en_base_speaker_tts
+    source_se = en_source_default_se if style == 'default' else en_source_style_se
+
+    speaker_wav = audio_file_path
+
+    try:
+        target_se, audio_name = se_extractor.get_se(speaker_wav, tone_color_converter, target_dir='processed',vad=True)
+
+        src_path = f'{output_dir}/tmp.wav'
+        tts_model.tts(prompt, src_path, speaker=style, language='English')
+
+        save_path = f'{output_dir}/output.wav'
+
+        encode_message = "@MyShell"
+        tone_color_converter.convert(audio_src_path=src_path, src_se=source_se, tgt_se=target_se, output_path=save_path, message=encode_message)
+
+        print("Audio generated successfully.")
+        play_audio(save_path)
+
+    except Exception as e:
+        print(f"Error during audio generation: {e}")
+
+def play_audio(file_path):
+    wf = wave.open(file_path, 'rb')
+
+    p = pyaudio.PyAudio()
+
+    stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
+                    channels =wf.getnchannels(),
+                    rate=wf.getframerate(),
+                    output=True)
+    
+    data = wf.rreadframes(1024)
+    while data:
+        stream.write(data)
+        data = wf.readframes(1024)
+
+    stream.stop_stream()
+    stream.close()
+    p.terminate()
+    
 
 parser = argparse.ArgumentParser(add_help=False)
 parser.add_argument(
@@ -121,20 +185,17 @@ try:
             data = q.get()
             if rec.AcceptWaveform(data):
                 res2 = json.loads(rec.Result())
-                ##prompt = res2["text"]
-                prompt = "Bonjour Théo, comment se passe ta belle journée ?"
-                print(prompt)
+                prompt = res2["text"]
+                print(res2["text"])
                 
 
                 if(prompt != ""):
                     solution = chatgpt_streamed(prompt)
                     prompt = ""
-                    audio = elevenlabs.generate(
-                        text=solution,
-                        voice="zcAOhNBS3c14rBihAFp1"
-                    )
-
-                    elevenlabs.play(audio)
+                    prompt2 = solution
+                    style = "default"
+                    audio_file_pth2 = "T:\assistant_coode\OpenVoice\resources\demo_speaker0.mp3"
+                    process_and_play(prompt2, style, audio_file_pth2)
                     
                 
            
@@ -144,6 +205,10 @@ except KeyboardInterrupt:
     parser.exit(0)
 except Exception as e:
     parser.exit(type(e).__name__ + ": " + str(e))
+
+
+
+
 
 
 
