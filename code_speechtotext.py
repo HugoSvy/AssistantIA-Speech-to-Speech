@@ -2,6 +2,7 @@ import openai
 from openai import OpenAI
 import os
 import time
+import pyttsx3
 
 import argparse
 import queue
@@ -124,10 +125,15 @@ try:
                 res2 = json.loads(rec.Result())
                 prompt = res2["text"]
                 print(res2["text"])
+                
 
                 if(prompt != ""):
                     solution = chatgpt_streamed(prompt)
                     prompt = ""
+                    s = pyttsx3.init()
+                    s.say(solution)
+                    s.runAndWait()
+                    
                 
            
 
