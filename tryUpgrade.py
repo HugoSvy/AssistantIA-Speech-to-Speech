@@ -21,7 +21,7 @@ NEON_GREEN = '\033[92m'
 RESET_COLOR = '\033[0m'
 
 client = OpenAI(base_url="http://localhost:1234/v1", api_key="not-needed")
-elevenlabs.set_api_key("f345de35e9448241acf383e074d281f3")
+elevenlabs.set_api_key("")
 
 def int_or_str(text):
     """Helper function for argument parsing."""
