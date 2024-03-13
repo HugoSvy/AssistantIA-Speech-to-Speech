@@ -1,6 +1,4 @@
-# Speech To Text
+# Speech To Speech
 
-## Vosk
 
-*Our teacher recommended it.*
 
