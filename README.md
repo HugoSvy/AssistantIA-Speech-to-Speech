@@ -2,7 +2,7 @@
 
 ## Branch
 
-We didn't know how to use git very well, so the clean version is in the "clean" branch.
+We didn't know how to use git very well, so the clean version is in the "**clean**" branch.
 
 ## Tree
 
