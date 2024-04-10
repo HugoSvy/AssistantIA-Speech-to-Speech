@@ -56,10 +56,10 @@ class DialogInterface(QWidget):
     def setup_ai(self):
         self.q = queue.Queue()
         self.client = OpenAI(base_url="http://localhost:1234/v1", api_key="not-needed")
-        self.clientEL = ElevenLabs(api_key="c6f91981453c9e8e31266dd577faaff4")
+        self.clientEL = ElevenLabs(api_key="a84a90d31f175bb4515f5878bb8ed735")
 
     def chatgpt_streamed(self, user_input):
-        messages = [{"role": "system", "content": "You are my friend Théo"}] + self.conversation_history + [{"role": "user", "content": user_input}]
+        messages = [{"role": "system", "content": "You are my friend Brigitte"}] + self.conversation_history + [{"role": "user", "content": user_input}]
 
         streamed_completion = self.client.chat.completions.create(
             model="local-model",
@@ -99,7 +99,7 @@ class DialogInterface(QWidget):
 
     def generate_response(self, prompt):
         solution = self.chatgpt_streamed(prompt)
-        audio = self.clientEL.generate(text=solution, voice="Dave", model="eleven_multilingual_v2")
+        audio = self.clientEL.generate(text=solution, voice="Sarah", model="eleven_multilingual_v2")
         self.repondreBrigitte(solution)
         elevenlabs.play(audio)
     
