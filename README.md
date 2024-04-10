@@ -22,18 +22,18 @@ Explanations for the choices :
 3. Charger le modèle et lancer le serveur local.
 
 **Etape 2 :** ffmpeg
-4. Télécharger ffmpeg-master-latest-win64-gpl.zip: https://github.com/BtbN/FFmpeg-Builds/releases
-5. Créer un dossier : `C:\ffmpeg`
-6. Mettre les fichiers du répertoire bin (ffmpeg.exe ffplay.exe ffprobe.exe) dans `C:\ffmpeg`
-7. Dans la barre de recherche Windows, aller dans : Variables d'environnement pour votre compte
-8. Cliquer sur Path, puis Modifier... et ajouter un nouveau chemin `C:\ffmpeg`
+1. Télécharger ffmpeg-master-latest-win64-gpl.zip: https://github.com/BtbN/FFmpeg-Builds/releases
+2. Créer un dossier : `C:\ffmpeg`
+3. Mettre les fichiers du répertoire bin (ffmpeg.exe ffplay.exe ffprobe.exe) dans `C:\ffmpeg`
+4. Dans la barre de recherche Windows, aller dans : Variables d'environnement pour votre compte
+5. Cliquer sur Path, puis Modifier... et ajouter un nouveau chemin `C:\ffmpeg`
 
 **Etape 3 :** 
-9. Aller sur VSC
-10. Dans un terminal, faire `git clone https://github.com/HugoSvy/assistant_ia` ou télécharger le projet sur github.
-11. Installation des dépendances : `pip install -r requirements.txt --user`
-12. Ajouter la clé d'api de elevenlabs : `self.clientEL = ElevenLabs(api_key="")`
-13. 
+1. Aller sur VSC
+2. Dans un terminal, faire `git clone https://github.com/HugoSvy/assistant_ia` ou télécharger le projet sur github.
+3. Installation des dépendances : `pip install -r requirements.txt --user`
+4. Ajouter la clé d'api de elevenlabs : `self.clientEL = ElevenLabs(api_key="")`
+5. 
 
 
 
