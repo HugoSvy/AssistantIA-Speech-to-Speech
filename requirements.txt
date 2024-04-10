@@ -2,4 +2,5 @@ openai
 sounddevice
 vosk
 elevenlabs
+PyQt5
 
