@@ -15,7 +15,16 @@ Explanations for the choices :
 
 ## Tuto
 
-1. `git clone https://github.com/HugoSvy/assistant_ia` ou télécharger le projet 
+Pour Windows avec VSC :
+1. Télécharger LM Studio : https://lmstudio.ai/
+2. Dans LM, télécharger une version d'ia (dans notre cas : dolphin-2.2.1-mistral-7b.Q5_K_M.gguf).
+3. Charger le modèle et lancer le serveur local.
+4. Aller sur VSC
+5. Dans un terminal, faire `git clone https://github.com/HugoSvy/assistant_ia` ou télécharger le projet sur github.
+6. Installation des dépendances : `pip install -r requirements.txt --user`
+7. Ajouter la clé d'api de elevenlabs : `self.clientEL = ElevenLabs(api_key="")`
+8. 
+
 
 
 
