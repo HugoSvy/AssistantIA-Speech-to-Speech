@@ -13,5 +13,9 @@ Explanations for the choices :
 - **TextToSpeech**: api, libraries...
 - **SpeechToSpeech**: mix of SpeechToText and TextToSpeech parts
 
+## Tuto
+
+1. `git clone https://github.com/HugoSvy/assistant_ia` ou télécharger le projet 
+
 
 
