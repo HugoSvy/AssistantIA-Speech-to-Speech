@@ -1,4 +1,4 @@
-import sy
+import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QHBoxLayout, QTextEdit, QPushButton, QLabel, QLineEdit, QScrollArea
 from PyQt5.QtCore import Qt
 import openai
