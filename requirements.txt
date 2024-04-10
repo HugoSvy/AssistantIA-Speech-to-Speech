@@ -1,1 +1,4 @@
+openai
+sounddevice
+vosk
 
