@@ -31,7 +31,7 @@ Explanations for the choices :
 **Etape 3 :** 
 1. Aller sur VSC
 2. Dans un terminal, faire `git clone https://github.com/HugoSvy/assistant_ia` ou télécharger le projet sur github.
-3. Installation des dépendances : `pip install -r requirements.txt --user`
+3. Installation des dépendances : `cd .\assistant_ia\` `pip install -r requirements.txt --user`
 4. Ajouter la clé d'api de elevenlabs : `self.clientEL = ElevenLabs(api_key="")`
 5. 
 
