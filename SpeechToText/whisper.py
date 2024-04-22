@@ -1,4 +1,4 @@
-import pyaudio
+import pyaudi
 import wave
 import whisper
 
