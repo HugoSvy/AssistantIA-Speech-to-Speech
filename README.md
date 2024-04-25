@@ -9,6 +9,13 @@ Explanations for the choices :
 - **TextToSpeech**: api, libraries...
 - **SpeechToSpeech**: mix of SpeechToText and TextToSpeech parts
 
+## Equipe
+
+- **Mehdi L'Hommeau**: Tuteur
+- **Hugo Savoye**
+- **Léa Mariot**
+- **Manon Duboscq**
+
 ## Tuto
 (Pour Windows avec VSC) 
 
